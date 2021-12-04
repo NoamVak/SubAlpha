@@ -3,7 +3,10 @@ package com.example.subalpha;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -34,6 +37,27 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.getMapAsync(this);
 
     }
+
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        String st=item.getTitle().toString();
+        if(st.equals("Map")){
+            return false;
+        }
+        if(st.equals("Auth")){
+            Intent in = new Intent(this, LoginScreen.class);
+            startActivity(in);
+        }
+        return true;
+    }
+
+
+
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);

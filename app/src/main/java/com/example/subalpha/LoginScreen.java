@@ -3,8 +3,11 @@ package com.example.subalpha;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -24,17 +27,34 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
-
         mAuth = FirebaseAuth.getInstance();
-        ed1=(EditText)findViewById(R.id.ed1);
-        ed2=(EditText)findViewById(R.id.ed2);
+        ed1=(EditText) findViewById(R.id.ed1);
+        ed2=(EditText) findViewById(R.id.ed2);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        String st=item.getTitle().toString();
+        if(st.equals("Map")) {
+            Intent si = new Intent(this, MainActivity.class);
+            startActivity(si);
+        }
+        if(st.equals("Auth"))
+            return false;
+
+        return true;
     }
 
     public void login(View view) {
         email=ed1.getText().toString();
         password=ed2.getText().toString();
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
@@ -47,6 +67,7 @@ public class LoginScreen extends AppCompatActivity {
                             Log.w("TAG", "createUserWithEmail:failure", task.getException());
                             Toast.makeText(LoginScreen.this,"Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginScreen.this, email+" "+password,Toast.LENGTH_SHORT).show();
                             updateUI(null);
                         }
 
