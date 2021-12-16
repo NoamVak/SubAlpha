@@ -2,9 +2,14 @@ package com.example.subalpha;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -27,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         setContentView(R.layout.activity_main);
 
 
+
         Bundle mapViewBundle = null;
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(MAP_VIEW_BUNDLE_KEY);
@@ -36,6 +42,30 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         mapView.onCreate(mapViewBundle);
         mapView.getMapAsync(this);
 
+
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, PackageManager.PERMISSION_GRANTED);
+
+        if(ActivityCompat.checkSelfPermission(MainActivity.this,Manifest.permission.ACCESS_FINE_LOCATION)== PackageManager.PERMISSION_GRANTED ){
+            turnGPSon();
+        }
+    }
+
+    private void turnGPSon() {
+        try
+        {
+            String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
+
+            if(!provider.contains("gps")){ //if gps is disabled
+                Intent intent = new Intent();
+                intent.setClassName("com.android.settings", "com.android.settings.widget.SettingsAppWidgetProvider");
+                intent.addCategory(Intent.CATEGORY_ALTERNATIVE);
+                intent.setData(Uri.parse("3"));
+                sendBroadcast(intent);
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
@@ -51,6 +81,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
         if(st.equals("Auth")){
             Intent in = new Intent(this, LoginScreen.class);
+            startActivity(in);
+        }
+        if(st.equals("Gallery")){
+            Intent in = new Intent(this, Gallery.class);
             startActivity(in);
         }
         return true;

@@ -47,6 +47,10 @@ public class LoginScreen extends AppCompatActivity {
         }
         if(st.equals("Auth"))
             return false;
+        if(st.equals("Gallery")){
+            Intent in = new Intent(this, Gallery.class);
+            startActivity(in);
+        }
 
         return true;
     }
@@ -54,7 +58,8 @@ public class LoginScreen extends AppCompatActivity {
     public void login(View view) {
         email=ed1.getText().toString();
         password=ed2.getText().toString();
-        mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(task.isSuccessful()){
