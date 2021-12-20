@@ -76,17 +76,26 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     public boolean onOptionsItemSelected(MenuItem item){
         String st=item.getTitle().toString();
-        if(st.equals("Map")){
+        if(st.equals("Map")) {
             return false;
         }
         if(st.equals("Auth")){
             Intent in = new Intent(this, LoginScreen.class);
             startActivity(in);
         }
+        if(st.equals("Camera")){
+            Intent in = new Intent(this, CameraAct.class);
+            startActivity(in);
+        }
+        if(st.equals("Notification")){
+            Intent si = new Intent(this, Notification.class);
+            startActivity(si);
+        }
         if(st.equals("Gallery")){
             Intent in = new Intent(this, Gallery.class);
             startActivity(in);
         }
+
         return true;
     }
 
