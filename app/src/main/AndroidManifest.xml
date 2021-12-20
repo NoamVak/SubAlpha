@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SubAlpha">
         <activity
+            android:name=".Notification"
+            android:exported="false" />
+        <activity
+            android:name=".CameraAct"
+            android:exported="false" />
+        <activity
             android:name=".Gallery"
             android:exported="false" />
         <activity
