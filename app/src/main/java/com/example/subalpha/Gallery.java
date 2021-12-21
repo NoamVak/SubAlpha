@@ -69,9 +69,7 @@ public class Gallery extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        super.onActivityResult(requestCode,
-                resultCode,
-                data);
+        super.onActivityResult(requestCode, resultCode, data);
 
         // checking request code and result code
         // if request code is PICK_IMAGE_REQUEST and
