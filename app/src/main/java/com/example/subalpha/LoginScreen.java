@@ -45,8 +45,17 @@ public class LoginScreen extends AppCompatActivity {
             Intent si = new Intent(this, MainActivity.class);
             startActivity(si);
         }
-        if(st.equals("Auth"))
+        if(st.equals("Auth")){
             return false;
+        }
+        if(st.equals("Camera")){
+            Intent in = new Intent(this, CameraAct.class);
+            startActivity(in);
+        }
+        if(st.equals("Notification")){
+            Intent in = new Intent(this, Notification.class);
+            startActivity(in);
+        }
         if(st.equals("Gallery")){
             Intent in = new Intent(this, Gallery.class);
             startActivity(in);
