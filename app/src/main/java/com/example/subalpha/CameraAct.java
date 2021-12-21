@@ -10,11 +10,17 @@ import android.view.View;
 
 public class CameraAct extends AppCompatActivity {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+
+
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){

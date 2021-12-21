@@ -1,19 +1,51 @@
 package com.example.subalpha;
 
+import static com.example.subalpha.help.CHANNEL_ID;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 
 public class Notification extends AppCompatActivity {
+    EditText ed;
+    public NotificationManagerCompat nManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
+
+
+        ed= (EditText) findViewById(R.id.ed);
+        nManager = NotificationManagerCompat.from(this);
+
     }
+
+
+    public void send(View view) {
+        String title = "NOTIFICATION";
+        String mess = ed.getText().toString();
+        ed.setText("");
+//create notification
+        android.app.Notification n = new NotificationCompat.Builder(this, CHANNEL_ID)
+
+                .setContentTitle(title)
+                .setContentText(mess)
+                .setSmallIcon(R.drawable.phone)
+                .setPriority(NotificationCompat.PRIORITY_LOW) //important
+                .build();
+
+        nManager.notify(1, n);
+
+    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu){
@@ -46,4 +78,6 @@ public class Notification extends AppCompatActivity {
 
         return true;
     }
+
+
 }
