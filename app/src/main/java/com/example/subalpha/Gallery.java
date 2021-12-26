@@ -32,7 +32,7 @@ public class Gallery extends AppCompatActivity {
     private Uri filePath;
     private final int PICK_IMAGE_REQUEST = 22;
 
-    int count=0;
+    public static int count=0;
 
     FirebaseStorage storage;
     StorageReference storageReference;
