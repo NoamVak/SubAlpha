@@ -105,7 +105,7 @@ public class CameraAct extends AppCompatActivity {
                         photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                 startActivityForResult(intent, CAMERA_REQUEST);
-            }
+            } //
         }
     }
 
